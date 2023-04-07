@@ -5,7 +5,7 @@
 
   // Include all files and folders you want to lint here.
   // **Note**: complex glob patterns are not supported (e.g. `./**/*.{ts,js}`).
-  "include": ["./src/*.ts", "./src/*.vue"],
+  "include": ["vite.config.ts", "./src/*.ts", "./src/*.vue"],
 
   "compilerOptions": {
     // Allow JS files to be linted.

@@ -5,7 +5,15 @@ import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
-  plugins: [vue(), VitePWA({ registerType: "autoUpdate" })],
+  plugins: [
+    vue(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        display: "minimal-ui",
+      },
+    }),
+  ],
 
   resolve: {
     alias: {

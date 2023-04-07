@@ -4,7 +4,7 @@
     <audio id="audio"></audio>
 
     <div
-      class="absolute top-0 right-0 px-4 py-2 flex items-center justify-center bg-stone-600 rounded-bl-xl text-stone-50 font-medium text-xs"
+      class="fixed top-0 right-0 px-4 py-2 flex items-center justify-center bg-stone-600 rounded-bl-xl text-stone-50 font-medium text-xs"
     >
       <p>HLS supported: {{ isHlsSupported ? "yes" : "no 😩" }}</p>
     </div>

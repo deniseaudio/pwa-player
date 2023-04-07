@@ -120,6 +120,7 @@ const startSafariAudioStream = (transcodedSongId: string) => {
 
   audio.addEventListener("loadedmetadata", () => {
     audio.play();
+    hasStarted.value = true;
   });
 };
 

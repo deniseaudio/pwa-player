@@ -100,6 +100,29 @@ const startHlsAudioStream = (transcodedSongId: string) => {
   });
 };
 
+/**
+ * Safari iOS does not support HLS.js. However, they do support native HLS M3U8 streams
+ * on the <audio> tag.
+ *
+ * @see https://stackoverflow.com/a/61008253/3669565
+ */
+const startSafariAudioStream = (transcodedSongId: string) => {
+  const audio = document.getElementById("audio") as HTMLAudioElement;
+
+  if (hasStarted.value) {
+    audio.pause();
+    hasStarted.value = false;
+  }
+
+  audio.src = `${
+    import.meta.env.VITE_API_BASE_URL
+  }/stream/${transcodedSongId}/320/playlist`;
+
+  audio.addEventListener("loadedmetadata", () => {
+    audio.play();
+  });
+};
+
 const transcodeSong = async () => {
   try {
     transcodeError.value = "";
@@ -112,7 +135,11 @@ const transcodeSong = async () => {
     isTranscoding.value = false;
 
     if (response.status === 200) {
-      startHlsAudioStream(songId.value);
+      if (isHlsSupported.value) {
+        startHlsAudioStream(songId.value);
+      } else {
+        startSafariAudioStream(songId.value);
+      }
     } else {
       transcodeError.value =
         "Something went wrong, please try another song ID.";

@@ -1,0 +1,14 @@
+{
+  // Extend a base config so you don't have to redefine your `compilerOptions`.
+  // It's recommended to extend the tsconfig from `@vue/tsconfig` package.
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+
+  // Include all files and folders you want to lint here.
+  // **Note**: complex glob patterns are not supported (e.g. `./**/*.{ts,js}`).
+  "include": ["./src/*.ts", "./src/*.vue"],
+
+  "compilerOptions": {
+    // Allow JS files to be linted.
+    "allowJs": true
+  }
+}

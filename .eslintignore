@@ -1,0 +1,8 @@
+node_modules
+.eslintrc.cjs
+env.d.ts
+tailwind.config.ts
+postcss.config.js
+tsconfig.json
+tsconfig.*.json
+vite.config.ts

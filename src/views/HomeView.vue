@@ -3,6 +3,12 @@
     <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
     <audio id="audio"></audio>
 
+    <div
+      class="absolute top-0 right-0 px-4 py-2 flex items-center justify-center bg-stone-600 rounded-bl-xl text-stone-50 font-medium text-xs"
+    >
+      <p>HLS supported: {{ isHlsSupported ? "yes" : "no 😩" }}</p>
+    </div>
+
     <h1 class="text-3xl text-stone-50 text-center font-bold">
       Denise Audio - PWA
     </h1>
@@ -65,6 +71,7 @@ const hlsInstance = ref<Hls | null>(null);
 const songId = ref<string>("1");
 const transcodeError = ref<string>("");
 
+const isHlsSupported = ref<boolean>(Hls.isSupported());
 const hasStarted = ref<boolean>(false);
 const isTranscoding = ref<boolean>(false);
 

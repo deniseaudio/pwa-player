@@ -6,7 +6,7 @@
   "description": "Application for Denise-Audio music player.",
   "scope": "/",
   "display": "standalone",
-  "start_url": "/index.html",
+  "start_url": "/",
   "theme_color": "#1b1917",
   "background_color": "#1b1917",
   "orientation": "any",

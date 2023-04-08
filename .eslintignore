@@ -6,3 +6,4 @@ postcss.config.js
 tsconfig.json
 tsconfig.*.json
 icons.json
+public/*.js

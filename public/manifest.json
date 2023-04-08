@@ -10,6 +10,7 @@
   "theme_color": "#1b1917",
   "background_color": "#1b1917",
   "orientation": "any",
+  "generated": true,
   "icons": [
     {
       "src": "/icons/windows11/SmallTile.scale-100.png",

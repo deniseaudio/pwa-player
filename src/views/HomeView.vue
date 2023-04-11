@@ -70,6 +70,7 @@ const hlsInstance = ref<Hls | null>(null);
 
 const songId = ref<string>("1");
 const transcodeError = ref<string>("");
+const bitrate = ref<number>(128);
 
 const isHlsSupported = ref<boolean>(Hls.isSupported());
 const hasStarted = ref<boolean>(false);
@@ -87,9 +88,9 @@ const startHlsAudioStream = (transcodedSongId: string) => {
   hlsInstance.value = new Hls();
 
   hlsInstance.value.loadSource(
-    `${
-      import.meta.env.VITE_API_BASE_URL
-    }/stream/${transcodedSongId}/320/playlist`
+    `${import.meta.env.VITE_API_BASE_URL}/stream/${transcodedSongId}/${
+      bitrate.value
+    }/playlist`
   );
 
   hlsInstance.value.attachMedia(audio);
@@ -116,7 +117,7 @@ const startSafariAudioStream = (transcodedSongId: string) => {
 
   audio.src = `${
     import.meta.env.VITE_API_BASE_URL
-  }/stream/${transcodedSongId}/320/playlist`;
+  }/stream/${transcodedSongId}/${bitrate.value}/playlist`;
 
   audio.addEventListener("loadedmetadata", () => {
     audio.play();

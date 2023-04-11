@@ -17,11 +17,27 @@
       Choose a song ID
     </p>
 
+    <div
+      v-if="songs.length"
+      class="songs-container max-w-sm mt-4 mx-auto overflow-scroll flex flex-col space-y-1 px-4 max-h-[150px]"
+    >
+      <p
+        v-for="(song, i) in songs"
+        :key="`songs-${i}`"
+        class="text-stone-200 text-sm"
+      >
+        ID: {{ song.id }}
+        <span class="text-xs font-medium text-stone-400 tracking-tight">{{
+          song.title
+        }}</span>
+      </p>
+    </div>
+
     <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
     <input
       type="text"
       v-model="songId"
-      class="mt-2 bg-stone-800 text-stone-50 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-600 transition duration-200 ease-in-out"
+      class="mt-4 bg-stone-800 text-stone-50 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-600 transition duration-200 ease-in-out"
     />
 
     <button
@@ -62,12 +78,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Hls from "hls.js";
 import { PauseIcon, PlayIcon } from "@heroicons/vue/24/solid";
 
 const hlsInstance = ref<Hls | null>(null);
 
+const songs = ref<any[]>([]);
 const songId = ref<string>("1");
 const transcodeError = ref<string>("");
 const bitrate = ref<number>(128);
@@ -164,4 +181,28 @@ const handleResume = () => {
     audio.play();
   }
 };
+
+onMounted(async () => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/songs`
+    );
+
+    if (response.ok) {
+      songs.value = await response.json();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 </script>
+
+<style lang="css" scoped>
+.songs-container {
+  scrollbar-width: none;
+}
+
+.songs-container::-webkit-scrollbar {
+  display: none;
+}
+</style>
